@@ -1,4 +1,5 @@
 com/example/makemytravel_ms/MakemytravelMsApplication.class
 com/example/makemytravel_ms/bus.class
+com/example/makemytravel_ms/hotel.class
 com/example/makemytravel_ms/flight.class
 com/example/makemytravel_ms/train.class
