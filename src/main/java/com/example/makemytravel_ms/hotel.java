@@ -10,7 +10,7 @@ public class hotel {
     @GetMapping("/myhotel")
     public String getData(){
 
-        return "Please book your hotel ticket";
+        return "Please book your hotel is sadasd ticket";
     }
 }
 
