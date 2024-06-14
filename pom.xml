@@ -16,7 +16,6 @@
 	<properties>
 		<java.version>17</java.version>
 	</properties>
-	<executable>/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home</executable>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
