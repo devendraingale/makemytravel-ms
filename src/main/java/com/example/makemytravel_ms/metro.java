@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 
-public class hotel {
-    @GetMapping("/myhotel")
+public class metro {
+    @GetMapping("/mymetro")
     public String getData(){
 
-        return "Please book your hotel is sadasd ticket";
+        return "Please book your metro ticket oo modeule";
     }
 }
 
