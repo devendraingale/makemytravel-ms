@@ -15,7 +15,7 @@ pipeline {
 		}
 		stage ('code Test'){
 			steps {
-				echo 'code is going to test'
+				echo 'code is going to tests'
 				sh 'mvn clean test'
 			}
 		}
