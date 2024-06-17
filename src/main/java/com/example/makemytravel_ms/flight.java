@@ -10,7 +10,7 @@ public class flight {
     @GetMapping("/myflight")
     public String getData(){
 
-        return "Please book your flight ticket";
+        return "Please book your flight ticket form Air India";
     }
 }
 
