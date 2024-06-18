@@ -10,7 +10,7 @@ public class metro {
     @GetMapping("/mymetro")
     public String getData(){
 
-        return "Please book your metro ticket oo modeule";
+        return "Please book your metro ticket oo modeule to test weebhook";
     }
 }
 
