@@ -10,7 +10,7 @@ public class bus {
     @GetMapping("/mybus")
     public String getData(){
 
-        return "Please book your bus ticket this is bug fix";
+        return "Please book your bus ticket form Redbus";
     }
 }
 
