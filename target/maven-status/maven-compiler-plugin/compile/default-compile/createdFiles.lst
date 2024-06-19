@@ -1,6 +1,7 @@
-com/example/makemytravel_ms/holiday.class
-com/example/makemytravel_ms/bus.class
-com/example/makemytravel_ms/metro.class
-com/example/makemytravel_ms/train.class
-com/example/makemytravel_ms/MakemytravelMsApplication.class
-com/example/makemytravel_ms/flight.class
+com\example\makemytravel_ms\MakemytravelMsApplication.class
+com\example\makemytravel_ms\holiday.class
+com\example\makemytravel_ms\flight.class
+com\example\makemytravel_ms\train.class
+com\example\makemytravel_ms\mono.class
+com\example\makemytravel_ms\metro.class
+com\example\makemytravel_ms\bus.class
