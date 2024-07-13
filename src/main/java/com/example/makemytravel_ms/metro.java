@@ -13,7 +13,3 @@ public class metro {
         return "Please book your metro ticket oo modeule to weebhook";
     }
 }
-
-
-
-
