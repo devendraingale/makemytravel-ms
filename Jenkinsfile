@@ -32,13 +32,6 @@ pipeline {
 				echo 'Docker build completed succesfully'
 			}
 		}
-		stage ('Docker Push to Docker Hub'){
-			steps {
-				scripts{
-					withCredentials ()
-				}
-			}
-		}
 
 	}
 }
