@@ -27,8 +27,8 @@ pipeline {
 		}
 		stage ('Docker Build'){
 			steps {
-				echo 'Docker is in building state'
-				sh 'docker built -t ingaledevendra/makemytrip-ms .'
+				sh 'cd /var/jenkins_home/workspace/Product Team A/Travel-booking-ms_Pipeline'
+				sh 'docker built -t makemytrip-ms .'
 				echo 'Docker build completed succesfully'
 			}
 		}
