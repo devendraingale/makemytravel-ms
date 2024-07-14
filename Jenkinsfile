@@ -25,11 +25,18 @@ pipeline {
 				sh 'mvn clean package'
 			}
 		}
-		stage ('Docker Build){
+		stage ('Docker Build'){
 			steps {
 				echo 'Docker is in building state'
 				sh 'docker built -t ingaledevendra/makemytrip-ms .'
 				echo 'Docker build completed succesfully'
+			}
+		}
+		stage ('Docker Push to Docker Hub'){
+			steps {
+				scripts{
+					withCredentials ()
+				}
 			}
 		}
 
