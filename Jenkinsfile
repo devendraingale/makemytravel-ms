@@ -27,7 +27,6 @@ pipeline {
 		}
 		stage ('Docker Build'){
 			steps {
-				sh 'cd /var/jenkins_home/workspace/'
 				sh 'docker built -t makemytrip-ms .'
 				echo 'Docker build completed succesfully'
 			}
