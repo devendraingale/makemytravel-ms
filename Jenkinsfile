@@ -27,7 +27,7 @@ pipeline {
 		}
 		stage ('Docker Build'){
 			steps {
-				sh 'docker built -t makemytrip-ms .'
+				sh 'docker build -t makemytrip-ms .'
 				echo 'Docker build completed succesfully'
 			}
 		}
