@@ -27,7 +27,7 @@ pipeline {
 		}
 		stage ('Docker Build'){
 			steps {
-				sh 'podman build -t makemytravel-ms .'
+				sh 'docker build -t makemytravel-ms .'
 				echo 'Docker build completed succesfully'
 			}
 		}
