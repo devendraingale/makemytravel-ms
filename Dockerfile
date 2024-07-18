@@ -9,7 +9,6 @@ COPY ./target/makemytravel-ms-0.0.1.war /app/application.war
 
 # Expose port 8080 (adjust if your application uses a different port)
 EXPOSE 8080
-CMD ["java", "-jar", "makemytravel-ms-0.0.1.war"]
 
 # Command to run the application when the container starts
 CMD ["java", "-jar", "application.war"]
