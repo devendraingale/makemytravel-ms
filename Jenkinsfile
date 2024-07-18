@@ -33,17 +33,17 @@ pipeline {
 		}
 		stage ('Docker Image Amazon ECR push'){
 			steps {
-				scripts{
-					withDockerRegistry([credentialsId: 'ecr: us-east-1:ecr-credentials', url: "590184100688.dkr.ecr.us-east-1.amazonaws.com/makemytravel"]){
-					sh ''
-					echo 'list of docker images Prisent in local'
-					docker images
-					echo 'Docker tag'
-					sh 'docker tag makemytravel-ms:latest 590184100688.dkr.ecr.us-east-1.amazonaws.com/makemytravel-ms'
-					echo 'pushing imag'
-					sh 'docker push 590184100688.dkr.ecr.us-east-1.amazonaws.com/makemytravel-ms'					
-					}
-				}
+				steps {
+                echo "Tagging Docker Image for ECR: ${env.ECR_IMAGE_NAME}"
+                sh "docker tag ${env.IMAGE_NAME} ${env.ECR_IMAGE_NAME}"
+                echo "Docker Image Tagging Completed"
+
+                withDockerRegistry([credentialsId: 'ecr:us-east-1:ecr-credentials', url: "590184100688.dkr.ecr.us-east-1.amazonaws.com/makemytravel"]) {
+                    echo "Pushing Docker Image to ECR: ${env.ECR_IMAGE_NAME}"
+                    sh "docker push ${env.ECR_IMAGE_NAME}"
+                    echo "Docker Image Push to ECR Completed"
+                }
+            }
 			}
 		}
 
