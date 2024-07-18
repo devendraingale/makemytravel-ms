@@ -31,6 +31,19 @@ pipeline {
 				echo 'Docker build completed succesfully'
 			}
 		}
+		stage ('Docker Image Amazon ECR push'){
+			steps {
+				scripts{
+					withDockerRegistry([credentialsId: 'ecr: us-east-1:ecr-credentials', url: "590184100688.dkr.ecr.us-east-1.amazonaws.com/makemytravel"]){
+					sh ''
+					echo 'list of docker images Prisent in local'
+					docker images
+					echo 'Docker tag'
+					docker tag makemytravel-ms:latest 590184100688.dkr.ecr.us-east-1.amazonaws.com/makemytravel-ms
+					echo docker push 590184100688.dkr.ecr.us-east-1.amazonaws.com/makemytravel-ms					}
+				}
+			}
+		}
 
 	}
 }
