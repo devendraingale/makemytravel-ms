@@ -39,8 +39,10 @@ pipeline {
 					echo 'list of docker images Prisent in local'
 					docker images
 					echo 'Docker tag'
-					docker tag makemytravel-ms:latest 590184100688.dkr.ecr.us-east-1.amazonaws.com/makemytravel-ms
-					echo docker push 590184100688.dkr.ecr.us-east-1.amazonaws.com/makemytravel-ms					}
+					sh 'docker tag makemytravel-ms:latest 590184100688.dkr.ecr.us-east-1.amazonaws.com/makemytravel-ms'
+					echo 'pushing imag'
+					sh 'docker push 590184100688.dkr.ecr.us-east-1.amazonaws.com/makemytravel-ms'					
+					}
 				}
 			}
 		}
