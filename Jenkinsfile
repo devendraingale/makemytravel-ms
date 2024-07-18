@@ -36,14 +36,7 @@ pipeline {
 				echo 'Docker build completed succesfully'
 			}
 		}
-		stage ('Docker Image Amazon ECR push'){
-			steps {
-                
-				sh "docker push $(aws sts get-caller-identity --query 'Account' --output text).dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY_NAME}:${IMAGE_TAG}"
-                
-            }
-			}
-		}
+		
 
 	}
 }
