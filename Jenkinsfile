@@ -33,7 +33,6 @@ pipeline {
 		}
 		stage ('Docker Image Amazon ECR push'){
 			steps {
-				steps {
                 echo "Tagging Docker Image for ECR: ${env.ECR_IMAGE_NAME}"
                 sh "docker tag ${env.IMAGE_NAME} ${env.ECR_IMAGE_NAME}"
                 echo "Docker Image Tagging Completed"
@@ -42,7 +41,7 @@ pipeline {
                     echo "Pushing Docker Image to ECR: ${env.ECR_IMAGE_NAME}"
                     sh "docker push ${env.ECR_IMAGE_NAME}"
                     echo "Docker Image Push to ECR Completed"
-                }
+                
             }
 			}
 		}
