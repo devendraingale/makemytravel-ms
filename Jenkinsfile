@@ -6,6 +6,11 @@ pipeline {
     tools {
         maven 'Maven'
     }
+	environment {
+        AWS_REGION = 'us-east-1' // Specify your AWS region
+        ECR_REPOSITORY_NAME = 'makemytravel' // Specify your ECR repository name
+        IMAGE_TAG = 'latest' // You can dynamically set this to a version number or build ID
+    }
 	stages {
 		stage ('code Compile'){
 			steps {
@@ -33,14 +38,8 @@ pipeline {
 		}
 		stage ('Docker Image Amazon ECR push'){
 			steps {
-                echo "Tagging Docker Image for ECR: ${env.ECR_IMAGE_NAME}"
-                sh "docker tag ${env.IMAGE_NAME} ${env.ECR_IMAGE_NAME}"
-                echo "Docker Image Tagging Completed"
-
-                withDockerRegistry([credentialsId: 'ecr:us-east-1:ecr-credentials', url: "590184100688.dkr.ecr.us-east-1.amazonaws.com/makemytravel"]) {
-                    echo "Pushing Docker Image to ECR: ${env.ECR_IMAGE_NAME}"
-                    sh "docker push ${env.ECR_IMAGE_NAME}"
-                    echo "Docker Image Push to ECR Completed"
+                
+				sh "docker push $(aws sts get-caller-identity --query 'Account' --output text).dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY_NAME}:${IMAGE_TAG}"
                 
             }
 			}
