@@ -6,6 +6,11 @@ pipeline {
     tools {
         maven 'Maven'
     }
+	environment {
+        // Define Nexus repository URL and credentials ID
+        NEXUS_URL = 'login http://10.0.0.18:8085/repository/makemytravel-ms/'
+        NEXUS_CREDENTIALS = 'nexus-credentials'
+    }
 	stages {
 		stage ('code Compile'){
 			steps {
@@ -27,10 +32,21 @@ pipeline {
 		}
 		stage ('Docker Build'){
 			steps {
-				sh 'podman build -t makemytravel-ms .'
+				sh 'docker build -t makemytravel-ms .'
 				echo 'Docker build completed succesfully'
 			}
 		}
+		stage ('Docker Image Push to Nexus'){
+			steps {
+					sh 'docker login http://10.0.0.18:8085/repository/makemytravel-ms/ -u admin -p Devstar@20' 
+					echo "Push Docker Image to Nexus: In Progress"
+					sh 'docker tag makemytravel-ms 10.0.0.18:8085/makemytravel-ms:latest'
+					sh 'docker push 10.0.0.18:8085/makemytravel-ms'
+					echo "push Docker Image to Nexus: Completed"
+					
+				}
+				
+			}
 
 	}
 }
