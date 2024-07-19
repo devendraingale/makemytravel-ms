@@ -10,6 +10,7 @@ pipeline {
         // Define Nexus repository URL and credentials ID
         NEXUS_URL = 'login http://10.0.0.18:8085/repository/makemytravel-ms/'
         NEXUS_CREDENTIALS = 'nexus-credentials'
+		withCredentials([usernamePassword(credentialsId: "${nexus-credentials}", usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')])
     }
 	stages {
 		stage ('code Compile'){
@@ -38,17 +39,14 @@ pipeline {
 		}
 		stage ('Docker Image Push to Nexus'){
 			steps {
-				script{
-					withCredentials([usernamePassword(credentialsId: "${NEXUS_CREDENTIALS_ID}", usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]){
+				script {
+					
 					echo $NEXUS_USERNAME
 					sh 'docker login http://10.0.0.18:8085/repository/makemytravel-ms/ -u admin -p Devstar@20' 
 					echo "Push Docker Image to Nexus: In Progress"
 					sh 'docker tag makemytravel-ms 10.0.0.18:8085/makemytravel-ms:latest'
 					sh 'docker push 10.0.0.18:8085/makemytravel-ms'
 					echo "push Docker Image to Nexus: Completed"
-
-					}
-					
 
 				}
 					
