@@ -38,16 +38,11 @@ pipeline {
 		}
 		stage ('Docker Image Push to Nexus'){
 			steps {
-				scipts{
-					withCredentials([usernamePassword(credentialsId: nexus-credentials, passwordVariable: 'NEXUS_PASSWORD')]){
-					sh 'docker login http://10.0.0.18:8085/repository/makemytravel-ms/ -u admin -p ${NEXUS_PASSWORD}' 
+					sh 'docker login http://10.0.0.18:8085/repository/makemytravel-ms/ -u admin -p Devstar@20' 
 					echo "Push Docker Image to Nexus: In Progress"
 					sh 'docker tag makemytravel-ms 10.0.0.18:8085/makemytravel-ms:latest'
 					sh 'docker push 10.0.0.18:8085/makemytravel-ms'
 					echo "push Docker Image to Nexus: Completed"
-					}
-					
-					}
 					
 				}
 				
