@@ -6,11 +6,6 @@ pipeline {
     tools {
         maven 'Maven'
     }
-	environment {
-        // Define Nexus repository URL and credentials ID
-        NEXUS_URL = 'login http://10.0.0.18:8085/repository/makemytravel-ms/'
-        NEXUS_CREDENTIALS = 'nexus-credentials'
-    }
 	stages {
 		stage ('code Compile'){
 			steps {
