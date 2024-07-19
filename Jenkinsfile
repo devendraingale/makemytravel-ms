@@ -45,10 +45,11 @@ pipeline {
 					sh 'docker tag makemytravel-ms 10.0.0.18:8085/makemytravel-ms:latest'
 					sh 'docker push 10.0.0.18:8085/makemytravel-ms'
 					echo "push Docker Image to Nexus: Completed"
+					}
+					}
 				}
 				
 			}
-		}
 
 	}
 }
