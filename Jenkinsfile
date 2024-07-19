@@ -7,9 +7,9 @@ pipeline {
         maven 'Maven'
     }
 	environment {
-        AWS_REGION = 'us-east-1' // Specify your AWS region
-        ECR_REPOSITORY_NAME = 'makemytravel' // Specify your ECR repository name
-        IMAGE_TAG = 'latest' // You can dynamically set this to a version number or build ID
+        // Define Nexus repository URL and credentials ID
+        NEXUS_URL = 'login http://10.0.0.18:8085/repository/makemytravel-ms/'
+        NEXUS_CREDENTIALS = 'nexus-credentials'
     }
 	stages {
 		stage ('code Compile'){
@@ -39,8 +39,9 @@ pipeline {
 		stage ('Docker Image Push to Nexus'){
 			steps {
 				scipts{
-					withCredentials([usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
-					sh 'docker login http://10.0.0.18:8085/repository/makemytravel-ms/ -u admin -p ${PASSWORD}' 
+					withCredentials([usernamePassword(credentialsId: nexus-credentials, passwordVariable: 'NEXUS_PASSWORD', usernameVariable: 'NEXUS_USERNAME')])
+					sh '' 
+					curl -u ${NEXUS_USERNAME}:${NEXUS_PASSWORD} ${NEXUS_URL}/service/metrics/ping
 					echo "Push Docker Image to Nexus: In Progress"
 					sh 'docker tag makemytravel-ms 10.0.0.18:8085/makemytravel-ms:latest'
 					sh 'docker push 10.0.0.18:8085/makemytravel-ms'
