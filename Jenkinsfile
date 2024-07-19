@@ -41,7 +41,7 @@ pipeline {
 				scipts{
 					withCredentials([usernamePassword(credentialsId: nexus-credentials, passwordVariable: 'NEXUS_PASSWORD', usernameVariable: 'NEXUS_USERNAME')])
 					sh '' 
-					curl -u ${NEXUS_USERNAME}:${NEXUS_PASSWORD} ${NEXUS_URL}/service/metrics/ping
+					curl -u \${NEXUS_USERNAME}:\${NEXUS_PASSWORD} \${NEXUS_URL}/service/metrics/ping
 					echo "Push Docker Image to Nexus: In Progress"
 					sh 'docker tag makemytravel-ms 10.0.0.18:8085/makemytravel-ms:latest'
 					sh 'docker push 10.0.0.18:8085/makemytravel-ms'
