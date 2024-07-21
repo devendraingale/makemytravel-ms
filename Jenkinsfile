@@ -31,6 +31,16 @@ pipeline {
 				echo 'Docker build completed succesfully'
 			}
 		}
+		stage ('Docker Tag and Docker login & Docker Push'){
+			steps {
+				steps {
+                withCredentials([usernamePassword(credentialsId: 'DOCKER_HUB_CRED', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+				sh 'docker tag makemytravel-ms ingaledevendra/makemytravel-ms'
+				sh 'docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD} docker.io'
+				sh 'docker push ingaledevendra/makemytravel-ms:latest'
+				}
+			}
+		}
 		stage ('Docker Image Push to Nexus'){
 			steps {
 				script {
