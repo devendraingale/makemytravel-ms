@@ -39,6 +39,7 @@ pipeline {
 				sh 'docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD} docker.io'
 				sh 'docker push ingaledevendra/makemytravel-ms:latest'
 				}
+				}
 			}
 		}
 		stage ('Docker Image Push to Nexus'){
