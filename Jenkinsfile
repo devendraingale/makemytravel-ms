@@ -31,6 +31,13 @@ pipeline {
 				echo 'Docker build completed succesfully'
 			}
 		}
+		stage ('Docker push to docker hub'){
+			steps {
+				sh 'docker tag makemytravel-ms ingaledevendra/makemytravel-ms:latest'
+				sh 'docker push ingaledevendra/makemytravel-ms:latest'
+				echo 'Docker build completed succesfully'
+			}
+		}
 
 	}
 }
