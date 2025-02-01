@@ -4,7 +4,7 @@ pipeline {
         }
     agent any
     environment {
-        DOCKER_CREDENTIALS = credentials('docker-hub-credentials')  // Jenkins credentials ID for Docker login
+        DOCKER_CREDENTIALS = credentials('8d6a9649-883a-4d97-b8bb-e272d569ffb2')  // Jenkins credentials ID for Docker login
     }
     tools {
         maven 'Maven'
@@ -33,6 +33,14 @@ pipeline {
 				sh 'docker build -t makemytravel-ms .'
 				echo 'Docker build completed succesfully'
 			}
+		}
+		stage('Docker Login') {
+            		steps {
+                		script {
+                    			// Docker login using stored credentials
+                    			sh "echo ${DOCKER_CREDENTIALS_PSW} | docker login -u ${DOCKER_CREDENTIALS_USR} --password-stdin"
+                		}
+            		}
 		}
 		stage ('Docker push to docker hub'){
 			steps {
