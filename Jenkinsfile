@@ -5,6 +5,8 @@ pipeline {
     agent any
     environment {
         DOCKER_CREDENTIALS = credentials('8d6a9649-883a-4d97-b8bb-e272d569ffb2')  // Jenkins credentials ID for Docker login
+	SSH_CREDENTIALS = credentials('	8d889fd7-4288-4988-a9c3-840d7e3c8e43') // Jenkins SSH credentials ID for target hosts
+	REMOTE_HOSTS = ['node-01', 'node-02', 'node-03'] // List of target hostnames/IPs
     }
     tools {
         maven 'Maven'
@@ -49,6 +51,23 @@ pipeline {
 				echo 'Docker build completed succesfully'
 			}
 		}
+		stage('Deploy Docker Container to Multiple Hosts') {
+            		steps {
+                		script {
+                    			// Deploy Docker container to each remote host
+                    			sshagent (credentials: [SSH_CREDENTIALS]) {
+                        								REMOTE_HOSTS.each { host ->
+                           								sh """
+                       								     	ssh -o StrictHostKeyChecking=no ${host} 'docker pull ingaledevendra/makemytravel-ms:latest'
+                            								ssh -o StrictHostKeyChecking=no ${host} 'docker stop app-01 || true'  // Stop any running container
+                            								ssh -o StrictHostKeyChecking=no ${host} 'docker rm app-01 || true'    // Remove the stopped container
+                            								ssh -o StrictHostKeyChecking=no ${host} 'docker run -d -p 8080:8080 --name app-01 ingaledevendra/makemytravel-ms:latest'  // Run the new container
+                            								"""
+                        							   	}
+                    								   }
+                			}
+            			}
+        	}
 
 	}
 }
