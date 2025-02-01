@@ -3,6 +3,9 @@ pipeline {
         buildDiscarder (logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5'))
         }
     agent any
+    environment {
+        DOCKER_CREDENTIALS = credentials('docker-hub-credentials')  // Jenkins credentials ID for Docker login
+    }
     tools {
         maven 'Maven'
     }
