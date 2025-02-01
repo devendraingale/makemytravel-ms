@@ -5,7 +5,7 @@ pipeline {
     agent any
     environment {
         DOCKER_CREDENTIALS = credentials('8d6a9649-883a-4d97-b8bb-e272d569ffb2')  // Jenkins credentials ID for Docker login
-	SSH_CREDENTIALS = credentials('	8d889fd7-4288-4988-a9c3-840d7e3c8e43') // Jenkins SSH credentials ID for target hosts
+	SSH_CREDENTIALS = credentials('8d889fd7-4288-4988-a9c3-840d7e3c8e43') // Jenkins SSH credentials ID for target hosts
 	REMOTE_HOSTS = 'node-01,node-02,node-03' // Comma-separated list of target hostnames/IPs (as a string)
     }
     tools {
@@ -55,7 +55,7 @@ pipeline {
             		steps {
                 		script {
                     			// Deploy Docker container to each remote host
-                    			sshagent (credentials: [SSH_CREDENTIALS]) {
+                    			sshagent (credentials: 8d889fd7-4288-4988-a9c3-840d7e3c8e43) {
                         								REMOTE_HOSTS.each { host ->
                            								sh """
                        								     	ssh -o StrictHostKeyChecking=no ${host} 'docker pull ingaledevendra/makemytravel-ms:latest'
