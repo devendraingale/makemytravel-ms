@@ -30,7 +30,6 @@ pipeline {
 		}
 		stage ('Docker Build'){
 			steps {
-				sh 'chmod 777 /var/run/docker.sock'
 				sh 'docker build -t makemytravel-ms .'
 				echo 'Docker build completed succesfully'
 			}
