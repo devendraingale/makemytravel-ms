@@ -30,6 +30,7 @@ pipeline {
 		}
 		stage ('Docker Build'){
 			steps {
+				sh 'chmod 777 /var/run/docker.sock'
 				sh 'docker build -t makemytravel-ms .'
 				echo 'Docker build completed succesfully'
 			}
@@ -44,7 +45,6 @@ pipeline {
 		}
 		stage ('Docker push to docker hub'){
 			steps {
-				sh 'chmod 777 /var/run/docker.sock'
 				sh 'docker tag makemytravel-ms ingaledevendra/makemytravel-ms:latest'
 				sh 'docker push ingaledevendra/makemytravel-ms:latest'
 				echo 'Docker build completed succesfully'
